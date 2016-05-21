@@ -12,33 +12,9 @@
     tools:context="uk.co.stefanocremona.onfidotest.MainActivity"
     android:weightSum="1">
 
-    <TextView
+    <uk.co.stefanocremona.mycomiclibrary.layouts.ComicLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        android:gravity="center"
-        android:id="@+id/titleid"/>
+        android:layout_height="wrap_content">
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/imageid"
-        android:clickable="true"/>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:gravity="center">
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Thumbs Up"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Thumbs Down"/>
-    </LinearLayout>
-
-
+    </uk.co.stefanocremona.mycomiclibrary.layouts.ComicLayout>
 </LinearLayout>
