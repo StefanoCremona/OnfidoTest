@@ -12,9 +12,18 @@
     tools:context="uk.co.stefanocremona.onfidotest.MainActivity"
     android:weightSum="1">
 
-    <uk.co.stefanocremona.mycomiclibrary.layouts.ComicLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="No Button Pressed yet"
+        android:layout_gravity="center_horizontal"
+        android:id="@+id/text1"/>
 
-    </uk.co.stefanocremona.mycomiclibrary.layouts.ComicLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Push Me"
+        android:layout_gravity="center_horizontal"
+        android:onClick="callTheActivity"/>
+
 </LinearLayout>

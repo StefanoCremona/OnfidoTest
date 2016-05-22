@@ -1,4 +1,4 @@
-package uk.co.stefanocremona.mycomiclibrary.tasks;
+package uk.co.stefanocremona.mycomiclibrary;
 
 import android.app.Activity;
 import android.os.AsyncTask;
@@ -18,7 +18,6 @@ import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.Map;
 
-import uk.co.stefanocremona.mycomiclibrary.R;
 import uk.co.stefanocremona.mycomiclibrary.utils.HTTPResponce;
 import uk.co.stefanocremona.mycomiclibrary.utils.HTTPUtils;
 
@@ -27,10 +26,12 @@ import uk.co.stefanocremona.mycomiclibrary.utils.HTTPUtils;
  */
 public class ComicTask extends AsyncTask<String, Void, HTTPResponce> {
     private static final String LOG_TAG = ComicTask.class.getSimpleName();
-    private final Activity mActivity;
+    private final Activity myCallerActivity;
+    private final View myCustomView;
 
-    public ComicTask(Activity activity) {
-        mActivity = activity;
+    public ComicTask(Activity callerActivity, View customView) {
+        myCallerActivity = callerActivity;
+        myCustomView = customView;
     }
 
     @Override
@@ -65,7 +66,7 @@ public class ComicTask extends AsyncTask<String, Void, HTTPResponce> {
         boolean succeded = false;
         if (result==null) {
             Log.d(LOG_TAG, "onPostExecute|Output String null!");
-            //GUIUtils.showDialog(mActivity, errTitle, errMessage);
+            //GUIUtils.showDialog(myCallerActivity, errTitle, errMessage);
         }else {
             Log.d(LOG_TAG, "onPostExecute|Output length: "+result.getResponceBody().toString().length());
             //populateTheView(result, outPutField);
@@ -76,17 +77,17 @@ public class ComicTask extends AsyncTask<String, Void, HTTPResponce> {
                     String imgPath = result.getResponceBody().getString("img");
                     final String alt     = result.getResponceBody().getString("alt");
 
-                    TextView myTitleTextView = (TextView) mActivity.findViewById(R.id.titleid);
+                    TextView myTitleTextView = (TextView) myCustomView.findViewById(R.id.titleid);
                     myTitleTextView.setText(title);
-                    ImageView myImage = (ImageView) mActivity.findViewById(R.id.imageid);
+                    ImageView myImage = (ImageView) myCustomView.findViewById(R.id.imageid);
                     if (myImage != null && imgPath!=null) {
-                        Picasso.with(mActivity)
+                        Picasso.with(myCallerActivity)
                                 .load(imgPath)
                                 .into(myImage);
                         myImage.setOnClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                Toast myToast = Toast.makeText(mActivity, alt, Toast.LENGTH_SHORT);
+                                Toast myToast = Toast.makeText(myCallerActivity, alt, Toast.LENGTH_SHORT);
                                 myToast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
                                 myToast.show();
                             }
@@ -110,6 +111,6 @@ public class ComicTask extends AsyncTask<String, Void, HTTPResponce> {
 
         }
         //if(!succeded)
-        //    GUIUtils.showDialog(mActivity, errTitle, errMessage);
+        //    GUIUtils.showDialog(myCallerActivity, errTitle, errMessage);
     }
 }
