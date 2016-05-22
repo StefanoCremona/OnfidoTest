@@ -18,6 +18,7 @@ import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.Map;
 
+import uk.co.stefanocremona.mycomiclibrary.utils.GUIUtils;
 import uk.co.stefanocremona.mycomiclibrary.utils.HTTPResponce;
 import uk.co.stefanocremona.mycomiclibrary.utils.HTTPUtils;
 
@@ -73,9 +74,9 @@ public class ComicTask extends AsyncTask<String, Void, HTTPResponce> {
             if(result.getResponceCode()==200 || result.getResponceCode()==201) {
                 succeded=true;
                 try {
-                    String title   = result.getResponceBody().getString("title");
-                    String imgPath = result.getResponceBody().getString("img");
-                    final String alt     = result.getResponceBody().getString("alt");
+                    String title     = result.getResponceBody().getString("title");
+                    String imgPath   = result.getResponceBody().getString("img");
+                    final String alt = result.getResponceBody().getString("alt");
 
                     TextView myTitleTextView = (TextView) myCustomView.findViewById(R.id.titleid);
                     myTitleTextView.setText(title);
@@ -110,7 +111,7 @@ public class ComicTask extends AsyncTask<String, Void, HTTPResponce> {
             }
 
         }
-        //if(!succeded)
-        //    GUIUtils.showDialog(myCallerActivity, errTitle, errMessage);
+        if(!succeded)
+            GUIUtils.showDialog(myCallerActivity, errTitle, errMessage);
     }
 }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">onfidotest</string>
+    <string name="buttonUpPressed">Thumbs UP pressed</string>
+    <string name="buttonDownPressed">Thumbs DOWN pressed</string>
 </resources>

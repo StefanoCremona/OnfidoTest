@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">MyComicLibrary</string>
+    <string name="cancel">Cancel</string>
+    <string name="serviceUrl">http://xkcd.com/info.0.json</string>
 </resources>

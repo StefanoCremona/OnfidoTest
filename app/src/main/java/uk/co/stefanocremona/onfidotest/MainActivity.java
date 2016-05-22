@@ -10,7 +10,7 @@ import android.widget.TextView;
 import uk.co.stefanocremona.mycomiclibrary.ComicCallbackInterface;
 import uk.co.stefanocremona.mycomiclibrary.ComicManager;
 
-public class MainActivity extends AppCompatActivity implements ComicCallbackInterface {
+public class MainActivity extends AppCompatActivity {
     static TextView myTextView;
 
     @Override
@@ -20,20 +20,21 @@ public class MainActivity extends AppCompatActivity implements ComicCallbackInte
         myTextView= (TextView) findViewById(R.id.text1);
     }
 
+    //Method called by the push button
     public void callTheActivity(View view){
         final Activity myActivity = this;
-        ComicManager.getComic(this);
-    }
+        ComicManager.getComic(this, new ComicCallbackInterface() {
+            @Override
+            public void thumbsUpPressed() {
+                Log.d("callTheActivity", "thumbsUpPressed");
+                myTextView.setText(R.string.buttonUpPressed);
+            }
 
-    @Override
-    public void thumbsUpPressed() {
-        Log.d("callTheActivity", "thumbsUpPressed");
-        myTextView.setText("Thumbs Up Pressed");
-    }
-
-    @Override
-    public void thumbsDownPressed() {
-        Log.d("callTheActivity", "thumbsDownPressed");
-        myTextView.setText("Thumbs Down Pressed");
+            @Override
+            public void thumbsDownPressed() {
+                Log.d("callTheActivity", "thumbsDownPressed");
+                myTextView.setText(R.string.buttonDownPressed);
+            }
+        });
     }
 }
